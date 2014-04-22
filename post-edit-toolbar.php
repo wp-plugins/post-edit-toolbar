@@ -2,11 +2,11 @@
 
 /*
 Plugin Name: Post Edit Toolbar
-Plugin URI: http://www.webyourbusiness.com
+Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds most recently edited posts to the WordPress Toolbar for easy access
 Version: 1.2.2
 Author: Web Your Business
-Author URI: http://www.webyourbusiness.com/post-edit-toolbar
+Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
