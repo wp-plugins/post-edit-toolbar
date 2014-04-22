@@ -49,3 +49,5 @@ Added an 'Add drafts' - if you get interrupted while composing a post, you'll lo
 * updated image included in the assets folder to be post-edit-tool-bar installed, not the page-edit-toolbar used as initial source
 = 1.2 = 
 * added drafts + separators
+= 1.2.2 =
+* added truncation of long post + draft titles so menu does not get too long
