@@ -10,7 +10,7 @@ Author URI: http://www.webyourbusiness.com/post-edit-toolbar
 
 Release Notes:
 
-1.2.2 - added truncation if max len of title is > 37 chars
+1.2.2 - added truncation if max len of title is > 40 chars
 1.2 - added drafters + separators
 1.1.1 - updated image included in the assets folder to be post-edit-tool-bar installed, not the page-edit-toolbar used as initial source
 1.1 - bug fix + add new post - added 'Add New Post' to top of list and fixed incorrect variables passed to get_posts() - they differ from get_pages()
@@ -58,8 +58,8 @@ function post_admin_bar_function( $wp_admin_bar ) {
 		if ($draft->post_title == '') {
 			$draft->post_title = '[EMPTY TITLE]';
 		} else {
-			if (strlen($draft->post_title) > 37){
-				$draft->post_title = substr($draft->post_title, 0, 32).' [...]';
+			if (strlen($draft->post_title) > 40){
+				$draft->post_title = substr($draft->post_title, 0, 36).' [...]';
 			}
 		}
 
@@ -99,8 +99,8 @@ function post_admin_bar_function( $wp_admin_bar ) {
 		if ($post->post_title == '') {
 			$post->post_title = '[EMPTY TITLE]';
 		} else {
-			if (strlen($post->post_title) > 37){
-				$post->post_title = substr($post->post_title, 0, 32).' [...]';
+			if (strlen($post->post_title) > 40){
+				$post->post_title = substr($post->post_title, 0, 36).' [...]';
 			}
 		}
 
