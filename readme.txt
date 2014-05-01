@@ -4,7 +4,7 @@ Donate link: http://webyourbusiness.com/post-edit-toolbar
 Tags: edit post, toolbar, admin bar, list posts, list drafts 
 Requires at least: 3.0.1
 Tested up to: 3.9
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,12 @@ Currently it only displays an add-new post list, your 5 most recent drafts and 5
 For FAQs - see the post-edit-toolbar page at: http://webyourbusiness.com/post-edit-toolbar
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+fixed broken page-edit-toolbar functionality where hierarchical caused less than 5 pages to be returned if there were not 5 top-level pages, but there were sub-pages
+
+= 1.3.0 =
+Rolled in the functionality of Page-Edit-Toolbar - so I could add and "Add Page" link at the top of that menu, as per Post-Edit-Toolbar (and drafts)
 
 = 1.2 =
 Added an 'Add drafts' - if you get interrupted while composing a post, you'll love access to drafts that I added in 1.2
