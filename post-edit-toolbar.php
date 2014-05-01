@@ -10,6 +10,7 @@ Author URI: http://www.webyourbusiness.com/post-edit-toolbar
 
 Release Notes:
 
+1.3.2 - found a problem with this new version if you had page-edit-toolbar installed - changed function names to resolve
 1.3.1 - fixed broken page-edit-toolbar functionality where - hierarchical caused less than 5 pages to be returned
 1.3.0 - Rolled in page-edit-toolbar functionality.
 1.2.2 - added truncation if max len of title is > 40 chars
@@ -19,10 +20,10 @@ Release Notes:
 1.0 - initial release - based on Page Edit Toolbar by Jeremy Green
 */
 
-add_action( 'admin_bar_menu', 'page_admin_bar_function', 998 );
-add_action( 'admin_bar_menu', 'post_admin_bar_function', 999 );
+add_action( 'admin_bar_menu', 'pot_page_admin_bar_function', 998 );
+add_action( 'admin_bar_menu', 'pot_post_admin_bar_function', 998 );
 
-function page_admin_bar_function( $wp_admin_bar ) {
+function pot_page_admin_bar_function( $wp_admin_bar ) {
 
 	// parent page
 	$args = array(
@@ -51,7 +52,7 @@ function page_admin_bar_function( $wp_admin_bar ) {
 	$wp_admin_bar->add_node( $args );
 
 	$page_drafts_found = 'N';
-	$page_drafts = recently_edited_page_drafts();
+	$page_drafts = pot_recently_edited_page_drafts();
 
 	foreach( $page_drafts as $page_draft ) {
 		$page_drafts_found = 'Y';
@@ -86,7 +87,7 @@ function page_admin_bar_function( $wp_admin_bar ) {
 	}
 
 	// get list of pages
-	$pages = recently_edited_pages();
+	$pages = pot_recently_edited_pages();
 
 	// loop through up to 10 most recently modified pages
 	foreach( $pages as $page ) {
@@ -111,7 +112,7 @@ function page_admin_bar_function( $wp_admin_bar ) {
 
 ///////////////////////// NOW POSTS /////////////////////////////
 
-function post_admin_bar_function( $wp_admin_bar ) {
+function pot_post_admin_bar_function( $wp_admin_bar ) {
 
 	// parent post
 	$args = array(
@@ -142,7 +143,7 @@ function post_admin_bar_function( $wp_admin_bar ) {
 
 	// get list of drafts
 	$drafts_found = 'N';
-	$drafts = recently_edited_drafts();
+	$drafts = pot_recently_edited_drafts();
 
 	foreach( $drafts as $draft ) {
 		$drafts_found = 'Y';
@@ -177,7 +178,7 @@ function post_admin_bar_function( $wp_admin_bar ) {
 	}
 
 	// get list of posts
-	$posts = recently_edited_posts();
+	$posts = pot_recently_edited_posts();
 
 	// loop through up to 5 most recently modified posts
 	foreach( $posts as $post ) {
@@ -201,7 +202,7 @@ function post_admin_bar_function( $wp_admin_bar ) {
 	}
 }
 
-function recently_edited_drafts() {
+function pot_recently_edited_drafts() {
 	$args = array(
 		'posts_per_page' => 2,
 		'sort_column' => 'post_modified',
@@ -212,7 +213,7 @@ function recently_edited_drafts() {
 	$drafts = get_posts( $args );
 	return $drafts;
 }
-function recently_edited_posts() {
+function pot_recently_edited_posts() {
 	$args = array(
 		'posts_per_page' => 5,
 		'sort_column' => 'post_modified',
@@ -222,7 +223,7 @@ function recently_edited_posts() {
 	$posts = get_posts( $args );
 	return $posts;
 }
-function recently_edited_pages() {
+function pot_recently_edited_pages() {
 	$args = array(
 		'number' => 5,
 		'post_type' => 'page',
@@ -234,7 +235,7 @@ function recently_edited_pages() {
 	$pages = get_pages( $args );
 	return $pages;
 }
-function recently_edited_page_drafts() {
+function pot_recently_edited_page_drafts() {
 	$args = array(
 		'number' => 5,
 		'post_type' => 'page',

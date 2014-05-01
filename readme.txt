@@ -34,6 +34,8 @@ For FAQs - see the post-edit-toolbar page at: http://webyourbusiness.com/post-ed
 
 == Upgrade Notice ==
 
+= 1.3.2 =
+rushed out 1.3.2 because installation onto a system with page-edit-toolbar caused a duplicate function name which could break your site - changed our function names to fix
 = 1.3.1 =
 fixed broken page-edit-toolbar functionality where hierarchical caused less than 5 pages to be returned if there were not 5 top-level pages, but there were sub-pages
 
@@ -57,3 +59,9 @@ Added an 'Add drafts' - if you get interrupted while composing a post, you'll lo
 * added drafts + separators
 = 1.2.2 =
 * added truncation of long post + draft titles so menu does not get too long
+= 1.3.0 =
+Rolled in page-edit-toolbar functionality.
+= 1.3.1 =
+fixed broken page-edit-toolbar functionality where - hierarchical caused less than 5 pages to be returned
+= 1.3.2 =
+1.3.2 - found a problem with this new version if you had page-edit-toolbar installed - changed function names to resolve
