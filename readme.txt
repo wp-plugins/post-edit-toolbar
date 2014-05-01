@@ -4,7 +4,7 @@ Donate link: http://webyourbusiness.com/post-edit-toolbar
 Tags: edit post, toolbar, admin bar, list posts, list drafts 
 Requires at least: 3.0.1
 Tested up to: 3.9
-Stable tag: 1.3
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
