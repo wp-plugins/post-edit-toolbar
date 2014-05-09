@@ -3,7 +3,7 @@ Contributors: WebYourBusiness
 Donate link: http://webyourbusiness.com/post-edit-toolbar
 Tags: edit post, toolbar, admin bar, list posts, list drafts 
 Requires at least: 3.0.1
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -67,3 +67,7 @@ Rolled in page-edit-toolbar functionality.
 fixed broken page-edit-toolbar functionality where - hierarchical caused less than 5 pages to be returned
 = 1.3.2 =
 1.3.2 - found a problem with this new version if you had page-edit-toolbar installed - changed function names to resolve
+= 1.3.3 =
+* removed home_url() calls - they seem redundant.
+= 1.4.0 =
+* Added link to site in the settings section + created function to shorten long post/page names (remove repeating code)
