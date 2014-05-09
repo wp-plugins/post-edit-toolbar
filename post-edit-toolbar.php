@@ -2,14 +2,16 @@
 
 /*
 Plugin Name: Post Edit Toolbar
-Plugin URI: http://www.webyourbusiness.com
+Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds most recently edited posts to the WordPress Toolbar for easy access
-Version: 1.3.2
+Version: 1.4.0
 Author: Web Your Business
-Author URI: http://www.webyourbusiness.com/post-edit-toolbar
+Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.0 - Added link to site in the settings section + created function to shorten long post/page names (remove repeating code)
+1.3.3 - removed home_url() calls - they seem redundant.
 1.3.2 - found a problem with this new version if you had page-edit-toolbar installed - changed function names to resolve
 1.3.1 - fixed broken page-edit-toolbar functionality where - hierarchical caused less than 5 pages to be returned
 1.3.0 - Rolled in page-edit-toolbar functionality.
@@ -18,18 +20,21 @@ Release Notes:
 1.1.1 - updated image included in the assets folder to be post-edit-tool-bar installed, not the page-edit-toolbar used as initial source
 1.1 - bug fix + add new post - added 'Add New Post' to top of list and fixed incorrect variables passed to get_posts() - they differ from get_pages()
 1.0 - initial release - based on Page Edit Toolbar by Jeremy Green
+
+==
+Known issues: Page list does not shorten length to <40 like it should - investigate later
 */
 
-add_action( 'admin_bar_menu', 'pot_page_admin_bar_function', 998 );
-add_action( 'admin_bar_menu', 'pot_post_admin_bar_function', 998 );
+add_action( 'admin_bar_menu', 'pet_page_admin_bar_function', 998 );
+add_action( 'admin_bar_menu', 'pet_post_admin_bar_function', 998 );
 
-function pot_page_admin_bar_function( $wp_admin_bar ) {
+function pet_page_admin_bar_function( $wp_admin_bar ) {
 
 	// parent page
 	$args = array(
 		'id' => 'page_list',
 		'title' => 'Page List',
-		'href' => home_url() . '/wp-admin/edit.php?post_type=page'
+		'href' => '/wp-admin/edit.php?post_type=page'
 	);
 	$wp_admin_bar->add_node( $args );
 
@@ -38,7 +43,7 @@ function pot_page_admin_bar_function( $wp_admin_bar ) {
 		'id' => 'page_item_a',
 		'title' => 'Add New Page',
 		'parent' => 'page_list',
-		'href' => home_url() . '/wp-admin/post-new.php?post_type=page'
+		'href' => '/wp-admin/post-new.php?post_type=page'
 	);
 	$wp_admin_bar->add_node( $args );
 
@@ -52,25 +57,20 @@ function pot_page_admin_bar_function( $wp_admin_bar ) {
 	$wp_admin_bar->add_node( $args );
 
 	$page_drafts_found = 'N';
-	$page_drafts = pot_recently_edited_page_drafts();
+	$page_drafts = pet_recently_edited_page_drafts();
 
+	// loop through the most recently modified page drafts
 	foreach( $page_drafts as $page_draft ) {
 		$page_drafts_found = 'Y';
 
-		if ($page_draft->post_title == '') {
-			$page_draft->post_title = '[EMPTY PAGE TITLE]';
-		} else {
-			if (strlen($page_draft->post_title) > 40){
-				$page_draft->post_title = substr($page_draft->post_title, 0, 36).' [...]';
-			}
-		}
+		$thispage->post_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
 
 		// add child nodes (page_draft recently edited)
 		$args = array(
 			'id' => 'post_item_' . $page_draft->ID,
 			'title' => '<strong><u>Draft</u>:</strong> '.$page_draft->post_title,
 			'parent' => 'page_list',
-			'href' => home_url() . '/wp-admin/post.php?post=' . $page_draft->ID . '&action=edit'
+			'href' => '/wp-admin/post.php?post=' . $page_draft->ID . '&action=edit'
 		);
 		$wp_admin_bar->add_node( $args );
 	}
@@ -87,24 +87,19 @@ function pot_page_admin_bar_function( $wp_admin_bar ) {
 	}
 
 	// get list of pages
-	$pages = pot_recently_edited_pages();
+	$pages = pet_recently_edited_pages();
 
-	// loop through up to 10 most recently modified pages
-	foreach( $pages as $page ) {
-		if ($page->post_title == '') {
-			$page->post_title = '[EMPTY PAGE TITLE]';
-		} else {
-			if (strlen($page->post_title) > 40){
-				$page->post_title = substr($page->post_title, 0, 36).' [...]';
-			}
-		}
+	// loop through the most recently modified pages
+	foreach( $pages as $thispage ) {
+
+		$thispage_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
 
 		// add child nodes (pages to edit)
 		$args = array(
-			'id' => 'page_item_' . $page->ID,
-			'title' => $page->post_title,
+			'id' => 'page_item_' . $thispage->ID,
+			'title' => $thispage_title,
 			'parent' => 'page_list',
-			'href' => home_url() . '/wp-admin/post.php?post=' . $page->ID . '&action=edit'
+			'href' => '/wp-admin/post.php?post=' . $thispage->ID . '&action=edit'
 		);
 		$wp_admin_bar->add_node( $args );
 	}
@@ -112,13 +107,13 @@ function pot_page_admin_bar_function( $wp_admin_bar ) {
 
 ///////////////////////// NOW POSTS /////////////////////////////
 
-function pot_post_admin_bar_function( $wp_admin_bar ) {
+function pet_post_admin_bar_function( $wp_admin_bar ) {
 
-	// parent post
+	// parent post - the 'edit-all-posts' link at the top
 	$args = array(
 		'id' => 'post_list',
 		'title' => 'Post List',
-		'href' => home_url() . '/wp-admin/edit.php'
+		'href' => '/wp-admin/edit.php'
 	);
 	$wp_admin_bar->add_node( $args );
 
@@ -127,7 +122,7 @@ function pot_post_admin_bar_function( $wp_admin_bar ) {
 		'id' => 'post_item_a',
 		'title' => 'Add New Post',
 		'parent' => 'post_list',
-		'href' => home_url() . '/wp-admin/post-new.php'
+		'href' => '/wp-admin/post-new.php'
 	);
 	$wp_admin_bar->add_node( $args );
 
@@ -143,25 +138,20 @@ function pot_post_admin_bar_function( $wp_admin_bar ) {
 
 	// get list of drafts
 	$drafts_found = 'N';
-	$drafts = pot_recently_edited_drafts();
+	$drafts = pet_recently_edited_drafts();
 
+	// loop through the most recently modified post drafts
 	foreach( $drafts as $draft ) {
 		$drafts_found = 'Y';
 
-		if ($draft->post_title == '') {
-			$draft->post_title = '[EMPTY POST TITLE]';
-		} else {
-			if (strlen($draft->post_title) > 40){
-				$draft->post_title = substr($draft->post_title, 0, 36).' [...]';
-			}
-		}
+		$draft->post_title = return_short_title($draft->post_title,'[EMPTY POST TITLE]');
 
 		// add child nodes (drafts recently edited)
 		$args = array(
 			'id' => 'post_item_' . $draft->ID,
 			'title' => '<strong><u>Draft</u>:</strong> '.$draft->post_title,
 			'parent' => 'post_list',
-			'href' => home_url() . '/wp-admin/post.php?post=' . $draft->ID . '&action=edit'
+			'href' => '/wp-admin/post.php?post=' . $draft->ID . '&action=edit'
 		);
 		$wp_admin_bar->add_node( $args );
 	}
@@ -178,31 +168,25 @@ function pot_post_admin_bar_function( $wp_admin_bar ) {
 	}
 
 	// get list of posts
-	$posts = pot_recently_edited_posts();
+	$posts = pet_recently_edited_posts();
 
-	// loop through up to 5 most recently modified posts
+	// loop through the most recently modified posts
 	foreach( $posts as $post ) {
 
-		if ($post->post_title == '') {
-			$post->post_title = '[EMPTY POST TITLE]';
-		} else {
-			if (strlen($post->post_title) > 40){
-				$post->post_title = substr($post->post_title, 0, 36).' [...]';
-			}
-		}
+		$post->post_title = return_short_title($post->post_title,'[EMPTY POST TITLE]');
 
 		// add child nodes (posts to edit)
 		$args = array(
 			'id' => 'post_item_' . $post->ID,
 			'title' => $post->post_title,
 			'parent' => 'post_list',
-			'href' => home_url() . '/wp-admin/post.php?post=' . $post->ID . '&action=edit'
+			'href' => '/wp-admin/post.php?post=' . $post->ID . '&action=edit'
 		);
 		$wp_admin_bar->add_node( $args );
 	}
 }
 
-function pot_recently_edited_drafts() {
+function pet_recently_edited_drafts() {
 	$args = array(
 		'posts_per_page' => 2,
 		'sort_column' => 'post_modified',
@@ -213,7 +197,7 @@ function pot_recently_edited_drafts() {
 	$drafts = get_posts( $args );
 	return $drafts;
 }
-function pot_recently_edited_posts() {
+function pet_recently_edited_posts() {
 	$args = array(
 		'posts_per_page' => 5,
 		'sort_column' => 'post_modified',
@@ -223,7 +207,7 @@ function pot_recently_edited_posts() {
 	$posts = get_posts( $args );
 	return $posts;
 }
-function pot_recently_edited_pages() {
+function pet_recently_edited_pages() {
 	$args = array(
 		'number' => 5,
 		'post_type' => 'page',
@@ -235,7 +219,7 @@ function pot_recently_edited_pages() {
 	$pages = get_pages( $args );
 	return $pages;
 }
-function pot_recently_edited_page_drafts() {
+function pet_recently_edited_page_drafts() {
 	$args = array(
 		'number' => 5,
 		'post_type' => 'page',
@@ -247,3 +231,29 @@ function pot_recently_edited_page_drafts() {
 	$pagedraft = get_pages( $args );
 	return $pagedraft;
 }
+function return_short_title($title_to_shorten,$if_empty){
+	$return_if_empty = $if_empty;
+	$this_title = $title_to_shorten;
+	$this_title_len=strlen($this_title);
+	if ($this_title_len < 40){
+		if ($this_title_len == 0) {
+			return($return_if_empty);
+		} else {
+			return($this_title);
+		}
+	} else {
+		return(substr($this_title, 0, 36).' [...]');
+	}
+}
+// This code adds the links in the settings section of the plugin
+if ( ! function_exists( 'post_edit_toolbar_plugin_meta' ) ) :
+        function post_edit_toolbar_plugin_meta( $links, $file ) { // add 'Plugin page' and 'Donate' links to plugin meta row
+                if ( strpos( $file, 'post-edit-toolbar.php' ) !== false ) {
+                        $links = array_merge( $links, array( '<a href="http://www.webyourbusiness.com/post-edit-toolbar/#donate" title="Support the development">Donate</a>' ) );
+                        $links = array_merge( $links, array( '<a href="http://www.webyourbusiness.com/post-edit-toolbar/#premium" title="Post-Edit-Toolbar Pro">Should we make a Pro version?</a>' ) );
+                }
+                return $links;
+        }
+        add_filter( 'plugin_row_meta', 'post_edit_toolbar_plugin_meta', 10, 2 );
+endif; // end of post_edit_toolbar_plugin_meta()
+?>
