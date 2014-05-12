@@ -12,17 +12,17 @@ Adds a dropdown to the WordPress toolbar to add a new post and quickly access yo
 
 == Description ==
 
-Adds a dropdown 'Post List' to the WordPress toolbar of the most recently edited drafts + posts. This gives you quick access to a work in progress, or a post that was recently published.
+Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts + posts. This provides you quick access to a work in progress, or a page/post that was recently published.
 
-This plugin is designed for publishers who make extensive use of posts and of particular use to those of us who get interrupted while composing posts!
+This plugin is designed for publishers who make extensive use of posts and of particular use to those of us who get interrupted while composing those posts!
 
-Currently it only displays an add-new post list, your 5 most recent drafts and 5 most recent published posts
+Currently it displays a separate menu for page drafts + pages, plus a second menu for your most recent draft posts and 5 most recent published posts
 
 == Installation ===
 
 1. Upload `post-edit-toolbar.php` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. A dropdown will appear in the WordPress toolbar titled 'Post List'.
+1. A pair of dropdown menus will appear in the WordPress toolbar titled 'Page List' and 'Post List'.
 
 == Screenshots ==
 
