@@ -8,7 +8,7 @@ Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds a dropdown to the WordPress toolbar to add a new post and quickly access your most recent drafts + posts. 
+Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts + posts.
 
 == Description ==
 
