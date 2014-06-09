@@ -34,6 +34,8 @@ For FAQs - see the post-edit-toolbar page at: http://webyourbusiness.com/post-ed
 
 == Upgrade Notice ==
 
+= 1.4.1 =
+commented out blank page title substitution while I investigate a reported bug.
 = 1.4.0 =
 Added link to site in the settings section + created function to shorten long post/page names (remove repeating code)
 = 1.3.2 =
