@@ -64,7 +64,7 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 	foreach( $page_drafts as $page_draft ) {
 		$page_drafts_found = 'Y';
 
-//		$thispage->post_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
+		$thispage->post_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
 
 		// add child nodes (page_draft recently edited)
 		$args = array(
@@ -93,7 +93,7 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 	// loop through the most recently modified pages
 	foreach( $pages as $thispage ) {
 
-//		$thispage_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
+		$thispage_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
 
 		// add child nodes (pages to edit)
 		$args = array(
