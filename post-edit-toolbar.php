@@ -10,6 +10,7 @@ Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.1 - commented out blank title page code while I debug it (must be a difference between post + page fuctions in codex)
 1.4.0 - Added link to site in the settings section + created function to shorten long post/page names (remove repeating code)
 1.3.3 - removed home_url() calls - they seem redundant.
 1.3.2 - found a problem with this new version if you had page-edit-toolbar installed - changed function names to resolve
@@ -63,7 +64,7 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 	foreach( $page_drafts as $page_draft ) {
 		$page_drafts_found = 'Y';
 
-		$thispage->post_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
+//		$thispage->post_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
 
 		// add child nodes (page_draft recently edited)
 		$args = array(
@@ -92,7 +93,7 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 	// loop through the most recently modified pages
 	foreach( $pages as $thispage ) {
 
-		$thispage_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
+//		$thispage_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
 
 		// add child nodes (pages to edit)
 		$args = array(
