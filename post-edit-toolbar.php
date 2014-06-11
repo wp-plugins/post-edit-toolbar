@@ -4,12 +4,13 @@
 Plugin Name: Post Edit Toolbar
 Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds most recently edited posts to the WordPress Toolbar for easy access
-Version: 1.4.1
+Version: 1.4.2
 Author: Web Your Business
 Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.2 - fixed a couple of typos - and initiated blank classes where needed - tested on multiple sites + php installs
 1.4.1 - commented out blank title page code while I debug it (must be a difference between post + page fuctions in codex)
 1.4.0 - Added link to site in the settings section + created function to shorten long post/page names (remove repeating code)
 1.3.3 - removed home_url() calls - they seem redundant.
@@ -64,12 +65,18 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 	foreach( $page_drafts as $page_draft ) {
 		$page_drafts_found = 'Y';
 
-		$thispage->post_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
+		// fixing "Warning: Creating default object from empty value in errors":
+		if (!is_object($page_draft)) {
+			$page_draft = new stdClass;
+			$page_draft->post_title = new stdClass;
+		}
+
+		$page_draft_title = return_short_title($page_draft->post_title,'[EMPTY DRAFT TITLE]');
 
 		// add child nodes (page_draft recently edited)
 		$args = array(
 			'id' => 'post_item_' . $page_draft->ID,
-			'title' => '<strong><u>Draft</u>:</strong> '.$page_draft->post_title,
+			'title' => '<strong><u>Draft</u>:</strong> '.$page_draft_title,
 			'parent' => 'page_list',
 			'href' => '/wp-admin/post.php?post=' . $page_draft->ID . '&action=edit'
 		);
@@ -92,6 +99,12 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 
 	// loop through the most recently modified pages
 	foreach( $pages as $thispage ) {
+
+		// fixing "Warning: Creating default object from empty value in errors":
+		if (!is_object($thispage)) {
+			$thispage = new stdClass;
+			$thispage->post_title = new stdClass;
+		}
 
 		$thispage_title = return_short_title($thispage->post_title,'[EMPTY PAGE TITLE]');
 
@@ -145,12 +158,18 @@ function pet_post_admin_bar_function( $wp_admin_bar ) {
 	foreach( $drafts as $draft ) {
 		$drafts_found = 'Y';
 
-		$draft->post_title = return_short_title($draft->post_title,'[EMPTY POST TITLE]');
+		// fixing "Warning: Creating default object from empty value in errors":
+		if (!is_object($draft)) {
+			$draft = new stdClass;
+			$draft->post_title = new stdClass;
+		}
+
+		$draft_post_title = return_short_title($draft->post_title,'[EMPTY DRAFT TITLE]');
 
 		// add child nodes (drafts recently edited)
 		$args = array(
 			'id' => 'post_item_' . $draft->ID,
-			'title' => '<strong><u>Draft</u>:</strong> '.$draft->post_title,
+			'title' => '<strong><u>Draft</u>:</strong> '.$draft_post_title,
 			'parent' => 'post_list',
 			'href' => '/wp-admin/post.php?post=' . $draft->ID . '&action=edit'
 		);
@@ -174,12 +193,18 @@ function pet_post_admin_bar_function( $wp_admin_bar ) {
 	// loop through the most recently modified posts
 	foreach( $posts as $post ) {
 
-		$post->post_title = return_short_title($post->post_title,'[EMPTY POST TITLE]');
+		// fixing "Warning: Creating default object from empty value in errors":
+		if (!is_object($post)) {
+			$post = new stdClass;
+			$post->post_title = new stdClass;
+		}
+
+		$post_post_title = return_short_title($post->post_title,'[EMPTY POST TITLE]');
 
 		// add child nodes (posts to edit)
 		$args = array(
 			'id' => 'post_item_' . $post->ID,
-			'title' => $post->post_title,
+			'title' => $post_post_title,
 			'parent' => 'post_list',
 			'href' => '/wp-admin/post.php?post=' . $post->ID . '&action=edit'
 		);
@@ -232,19 +257,27 @@ function pet_recently_edited_page_drafts() {
 	$pagedraft = get_pages( $args );
 	return $pagedraft;
 }
-function return_short_title($title_to_shorten,$if_empty){
+function return_short_title( $title_to_shorten, $if_empty ) {
+	// the variables passed
+	$the_title = $title_to_shorten;
 	$return_if_empty = $if_empty;
-	$this_title = $title_to_shorten;
-	$this_title_len=strlen($this_title);
-	if ($this_title_len < 40){
-		if ($this_title_len == 0) {
-			return($return_if_empty);
+	$return_value = $the_title;
+	if (trim($the_title)== FALSE) {
+		$the_title='';
+		$title_len=0;
+	} else {
+		$title_len=strlen($the_title);
+	}
+	if ($title_len < 40){
+		if ($title_len == 0) {
+			$return_value = $return_if_empty;
 		} else {
-			return($this_title);
+			$return_value = $the_title;
 		}
 	} else {
-		return(substr($this_title, 0, 36).' [...]');
+		$return_value = substr($the_title, 0, 36).' [...]';
 	}
+	return $return_value;
 }
 // This code adds the links in the settings section of the plugin
 if ( ! function_exists( 'post_edit_toolbar_plugin_meta' ) ) :

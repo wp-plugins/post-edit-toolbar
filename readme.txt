@@ -4,7 +4,7 @@ Donate link: http://webyourbusiness.com/post-edit-toolbar
 Tags: edit post, toolbar, admin bar, list posts, list drafts 
 Requires at least: 3.0.1
 Tested up to: 3.9.1
-Stable tag: 1.4.0
+Stable tag: 1.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,8 @@ For FAQs - see the post-edit-toolbar page at: http://webyourbusiness.com/post-ed
 
 == Upgrade Notice ==
 
+= 1.4.2 =
+fixed a couple of typos - and initiated blank classes where needed - tested on multiple sites + php installs
 = 1.4.1 =
 commented out blank page title substitution while I investigate a reported bug.
 = 1.4.0 =
