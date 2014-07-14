@@ -44,34 +44,36 @@ Added link to site in the settings section + created function to shorten long po
 rushed out 1.3.2 because installation onto a system with page-edit-toolbar caused a duplicate function name which could break your site - changed our function names to fix
 = 1.3.1 =
 fixed broken page-edit-toolbar functionality where hierarchical caused less than 5 pages to be returned if there were not 5 top-level pages, but there were sub-pages
-
 = 1.3.0 =
 Rolled in the functionality of Page-Edit-Toolbar - so I could add and "Add Page" link at the top of that menu, as per Post-Edit-Toolbar (and drafts)
-
 = 1.2 =
 Added an 'Add drafts' - if you get interrupted while composing a post, you'll love access to drafts that I added in 1.2
 
 == Changelog ==
 
-= 0.1 =
-* Initial plugin submission
-= 1.0 =
-* initial release - based on Page Edit Toolbar by Jeremy Green
-= 1.1 =
-* bug fix + add new post - added 'Add New Post' to top of list and fixed incorrect variables passed to get_posts() - they differ from get_pages()
-= 1.1.1 =
-* updated image included in the assets folder to be post-edit-tool-bar installed, not the page-edit-toolbar used as initial source
-= 1.2 = 
-* added drafts + separators
-= 1.2.2 =
-* added truncation of long post + draft titles so menu does not get too long
-= 1.3.0 =
-Rolled in page-edit-toolbar functionality.
-= 1.3.1 =
-fixed broken page-edit-toolbar functionality where - hierarchical caused less than 5 pages to be returned
-= 1.3.2 =
-1.3.2 - found a problem with this new version if you had page-edit-toolbar installed - changed function names to resolve
-= 1.3.3 =
-* removed home_url() calls - they seem redundant.
+= 1.4.2 =
+* fixed a couple of typos - and initiated blank classes where needed - tested on multiple sites + php installs
+= 1.4.1 =
+* commented out blank page title substitution while I investigate a reported bug.
 = 1.4.0 =
 * Added link to site in the settings section + created function to shorten long post/page names (remove repeating code)
+= 1.3.3 =
+* removed home_url() calls - they seem redundant.
+= 1.3.2 =
+1.3.2 - found a problem with this new version if you had page-edit-toolbar installed - changed function names to resolve
+= 1.3.1 =
+fixed broken page-edit-toolbar functionality where - hierarchical caused less than 5 pages to be returned
+= 1.3.0 =
+Rolled in page-edit-toolbar functionality.
+= 1.2.2 =
+* added truncation of long post + draft titles so menu does not get too long
+= 1.2 = 
+* added drafts + separators
+= 1.1.1 =
+* updated image included in the assets folder to be post-edit-tool-bar installed, not the page-edit-toolbar used as initial source
+= 1.1 =
+* bug fix + add new post - added 'Add New Post' to top of list and fixed incorrect variables passed to get_posts() - they differ from get_pages()
+= 1.0 =
+* initial release - based on Page Edit Toolbar by Jeremy Green
+= 0.1 =
+* Initial plugin submission
