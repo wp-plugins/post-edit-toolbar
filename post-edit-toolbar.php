@@ -4,12 +4,13 @@
 Plugin Name: Post Edit Toolbar
 Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds most recently edited posts to the WordPress Toolbar for easy access
-Version: 1.4.2
+Version: 1.4.4
 Author: Web Your Business
 Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.4 - Added bloginfo('wpurl') to fix installations inside subfolders menus now working
 1.4.2 - fixed a couple of typos - and initiated blank classes where needed - tested on multiple sites + php installs
 1.4.1 - commented out blank title page code while I debug it (must be a difference between post + page fuctions in codex)
 1.4.0 - Added link to site in the settings section + created function to shorten long post/page names (remove repeating code)
@@ -36,7 +37,7 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 	$args = array(
 		'id' => 'page_list',
 		'title' => 'Page List',
-		'href' => '/wp-admin/edit.php?post_type=page'
+		'href' => get_bloginfo('wpurl').'/wp-admin/edit.php?post_type=page'
 	);
 	$wp_admin_bar->add_node( $args );
 
@@ -45,7 +46,7 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 		'id' => 'page_item_a',
 		'title' => 'Add New Page',
 		'parent' => 'page_list',
-		'href' => '/wp-admin/post-new.php?post_type=page'
+		'href' => get_bloginfo('wpurl').'/wp-admin/post-new.php?post_type=page'
 	);
 	$wp_admin_bar->add_node( $args );
 
@@ -78,7 +79,7 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 			'id' => 'post_item_' . $page_draft->ID,
 			'title' => '<strong><u>Draft</u>:</strong> '.$page_draft_title,
 			'parent' => 'page_list',
-			'href' => '/wp-admin/post.php?post=' . $page_draft->ID . '&action=edit'
+			'href' => get_bloginfo('wpurl').'/wp-admin/post.php?post=' . $page_draft->ID . '&action=edit'
 		);
 		$wp_admin_bar->add_node( $args );
 	}
@@ -113,7 +114,7 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 			'id' => 'page_item_' . $thispage->ID,
 			'title' => $thispage_title,
 			'parent' => 'page_list',
-			'href' => '/wp-admin/post.php?post=' . $thispage->ID . '&action=edit'
+			'href' => get_bloginfo('wpurl').'/wp-admin/post.php?post=' . $thispage->ID . '&action=edit'
 		);
 		$wp_admin_bar->add_node( $args );
 	}
@@ -127,7 +128,7 @@ function pet_post_admin_bar_function( $wp_admin_bar ) {
 	$args = array(
 		'id' => 'post_list',
 		'title' => 'Post List',
-		'href' => '/wp-admin/edit.php'
+		'href' => get_bloginfo('wpurl').'/wp-admin/edit.php'
 	);
 	$wp_admin_bar->add_node( $args );
 
@@ -136,7 +137,7 @@ function pet_post_admin_bar_function( $wp_admin_bar ) {
 		'id' => 'post_item_a',
 		'title' => 'Add New Post',
 		'parent' => 'post_list',
-		'href' => '/wp-admin/post-new.php'
+		'href' => get_bloginfo('wpurl').'/wp-admin/post-new.php'
 	);
 	$wp_admin_bar->add_node( $args );
 
@@ -171,7 +172,7 @@ function pet_post_admin_bar_function( $wp_admin_bar ) {
 			'id' => 'post_item_' . $draft->ID,
 			'title' => '<strong><u>Draft</u>:</strong> '.$draft_post_title,
 			'parent' => 'post_list',
-			'href' => '/wp-admin/post.php?post=' . $draft->ID . '&action=edit'
+			'href' => get_bloginfo('wpurl').'/wp-admin/post.php?post=' . $draft->ID . '&action=edit'
 		);
 		$wp_admin_bar->add_node( $args );
 	}
@@ -206,7 +207,7 @@ function pet_post_admin_bar_function( $wp_admin_bar ) {
 			'id' => 'post_item_' . $post->ID,
 			'title' => $post_post_title,
 			'parent' => 'post_list',
-			'href' => '/wp-admin/post.php?post=' . $post->ID . '&action=edit'
+			'href' => get_bloginfo('wpurl').'/wp-admin/post.php?post=' . $post->ID . '&action=edit'
 		);
 		$wp_admin_bar->add_node( $args );
 	}
