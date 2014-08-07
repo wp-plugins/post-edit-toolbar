@@ -10,7 +10,7 @@ Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
-1.4.4 - Added bloginfo('wpurl') to fix installations inside subfolders menus now working
+1.4.4 - Added bloginfo('wpurl') to fix installations inside subfolders menus - now tested as working
 1.4.2 - fixed a couple of typos - and initiated blank classes where needed - tested on multiple sites + php installs
 1.4.1 - commented out blank title page code while I debug it (must be a difference between post + page fuctions in codex)
 1.4.0 - Added link to site in the settings section + created function to shorten long post/page names (remove repeating code)

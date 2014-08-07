@@ -37,7 +37,7 @@ For FAQs - see the post-edit-toolbar page at: http://webyourbusiness.com/post-ed
 == Upgrade Notice ==
 
 = 1.4.4 =
-fixed bug where /wp-admin didn't work - replaced with get_bloginfo('wpurl').'/wp-admin/'
+fixed bug where /wp-admin didn't work - replaced with get_bloginfo('wpurl').'/wp-admin/' - installations in folders other than root are now working
 = 1.4.2 =
 fixed a couple of typos - and initiated blank classes where needed - tested on multiple sites + php installs
 = 1.4.1 =
