@@ -14,9 +14,11 @@ Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of
 
 Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts + posts. This provides you quick access to a work in progress, or a page/post that was recently published.
 
-This plugin is designed for publishers who make extensive use of posts and of particular use to those of us who get interrupted while composing those posts!
+The new menus work as 'post quick edit' and 'page quick edit' shortcut menus - not forgetting 'drafts quick edit'.  The quick edit menus will allow you to access your recently used pages, posts and drafts in less clicks than first visting the posts page or pages page.
 
-Currently it displays a separate menu for page drafts + pages, plus a second menu for your most recent draft posts and 5 most recent published posts
+This plugin is designed for publishers who get interrupted while composing those posts (if you're anything like me - almost every post/page is interrupted, or composed and then saved as a draft before final publishing!
+
+Currently this plugin displays a separate menu for page drafts + pages, plus a second menu for your most recent draft posts and 5 most recent published posts
 
 == Installation ===
 
