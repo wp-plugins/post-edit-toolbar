@@ -4,12 +4,13 @@
 Plugin Name: Post Edit Toolbar
 Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds most recently edited posts to the WordPress Toolbar for easy access
-Version: 1.4.4.1
+Version: 1.4.6
 Author: Web Your Business
 Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.6 - Added Scheduled Pages + Posts Sections - so that future scheduled pages/posts show in the list
 1.4.4.1 - updated docs
 1.4.4 - Added bloginfo('wpurl') to fix installations inside subfolders menus - now tested as working
 1.4.2 - fixed a couple of typos - and initiated blank classes where needed - tested on multiple sites + php installs
@@ -28,6 +29,14 @@ Release Notes:
 ==
 Known issues: Page list does not shorten length to <40 like it should - investigate later
 */
+
+$no_page_drafts_to_show = 5;
+$no_page_future_to_show = 5;
+$no_page_edits_to_show  = 5;
+
+$no_post_drafts_to_show = 5;
+$no_post_future_to_show = 5;
+$no_post_edits_to_show  = 5;
 
 add_action( 'admin_bar_menu', 'pet_page_admin_bar_function', 998 );
 add_action( 'admin_bar_menu', 'pet_post_admin_bar_function', 998 );
@@ -61,8 +70,11 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 	$wp_admin_bar->add_node( $args );
 
 	$page_drafts_found = 'N';
+	$page_future_found = 'N';
 	$page_drafts = pet_recently_edited_page_drafts();
+	$page_future = pet_recently_edited_page_future();
 
+//////////////
 	// loop through the most recently modified page drafts
 	foreach( $page_drafts as $page_draft ) {
 		$page_drafts_found = 'Y';
@@ -95,6 +107,40 @@ function pet_page_admin_bar_function( $wp_admin_bar ) {
 		);
 		$wp_admin_bar->add_node( $args );
 	}
+//////////////
+	// loop through the most recently future pages
+	foreach( $page_future as $future_page ) {
+		$page_future_found = 'Y';
+
+		// fixing "Warning: Creating default object from empty value in errors":
+		if (!is_object($future_page)) {
+			$future_page = new stdClass;
+			$future_page->post_title = new stdClass;
+		}
+
+		$future_page_title = return_short_title($future_page->post_title,'[EMPTY DRAFT TITLE]');
+
+		// add child nodes (future_page recently edited)
+		$args = array(
+			'id' => 'post_item_' . $future_page->ID,
+			'title' => '<strong><u>Future</u>:</strong> '.$future_page_title,
+			'parent' => 'page_list',
+			'href' => get_bloginfo('wpurl').'/wp-admin/post.php?post=' . $future_page->ID . '&action=edit'
+		);
+		$wp_admin_bar->add_node( $args );
+	}
+
+	if ($page_future_found == 'Y') {
+		// separator from page_future to published
+		$args = array(
+			'id' => 'page_item_d',
+			'title' => '------------------------',
+			'parent' => 'page_list',
+			'href' => ''
+		);
+		$wp_admin_bar->add_node( $args );
+	}
+//////////////
 
 	// get list of pages
 	$pages = pet_recently_edited_pages();
@@ -154,6 +200,7 @@ function pet_post_admin_bar_function( $wp_admin_bar ) {
 
 	// get list of drafts
 	$drafts_found = 'N';
+	$post_future_found = 'N';
 	$drafts = pet_recently_edited_drafts();
 
 	// loop through the most recently modified post drafts
@@ -188,6 +235,41 @@ function pet_post_admin_bar_function( $wp_admin_bar ) {
 		);
 		$wp_admin_bar->add_node( $args );
 	}
+//////////////
+	// loop through the most recently future posts
+	$future_posts = pet_recently_edited_posts_future();
+	foreach( $future_posts as $future_post ) {
+		$post_future_found = 'Y';
+
+		// fixing "Warning: Creating default object from empty value in errors":
+		if (!is_object($future_post)) {
+			$future_post = new stdClass;
+			$future_post->post_title = new stdClass;
+		}
+
+		$future_post_title = return_short_title($future_post->post_title,'[EMPTY DRAFT TITLE]');
+
+		// add child nodes (future_post recently edited)
+		$args = array(
+			'id' => 'post_item_' . $future_post->ID,
+			'title' => '<strong><u>Future</u>:</strong> '.$future_post_title,
+			'parent' => 'post_list',
+			'href' => get_bloginfo('wpurl').'/wp-admin/post.php?post=' . $future_post->ID . '&action=edit'
+		);
+		$wp_admin_bar->add_node( $args );
+	}
+
+	if ($post_future_found == 'Y') {
+		// separator from post_future to published
+		$args = array(
+			'id' => 'post_item_d',
+			'title' => '------------------------',
+			'parent' => 'post_list',
+			'href' => ''
+		);
+		$wp_admin_bar->add_node( $args );
+	}
+//////////////
 
 	// get list of posts
 	$posts = pet_recently_edited_posts();
@@ -215,8 +297,9 @@ function pet_post_admin_bar_function( $wp_admin_bar ) {
 }
 
 function pet_recently_edited_drafts() {
+	global $no_post_drafts_to_show;
 	$args = array(
-		'posts_per_page' => 2,
+		'posts_per_page' => $no_post_drafts_to_show,
 		'sort_column' => 'post_modified',
 		'orderby' => 'post_date',
 		'post_status' => 'draft',
@@ -226,8 +309,9 @@ function pet_recently_edited_drafts() {
 	return $drafts;
 }
 function pet_recently_edited_posts() {
+	global $no_post_edits_to_show;
 	$args = array(
-		'posts_per_page' => 5,
+		'posts_per_page' => $no_post_edits_to_show,
 		'sort_column' => 'post_modified',
 		'orderby' => 'post_date',
 		'order' => 'DESC'
@@ -235,9 +319,22 @@ function pet_recently_edited_posts() {
 	$posts = get_posts( $args );
 	return $posts;
 }
-function pet_recently_edited_pages() {
+function pet_recently_edited_posts_future() {
+	global $no_post_future_to_show;
 	$args = array(
-		'number' => 5,
+		'posts_per_page' => $no_post_future_to_show,
+		'sort_column' => 'post_modified',
+		'orderby' => 'post_date',
+		'post_status' => 'future',
+		'order' => 'DESC'
+	);
+	$posts = get_posts( $args );
+	return $posts;
+}
+function pet_recently_edited_pages() {
+	global $no_page_edits_to_show;
+	$args = array(
+		'number' => $no_page_edits_to_show,
 		'post_type' => 'page',
 		'post_status' => 'publish',
 		'sort_column' => 'post_modified',
@@ -248,8 +345,9 @@ function pet_recently_edited_pages() {
 	return $pages;
 }
 function pet_recently_edited_page_drafts() {
+	global $no_page_drafts_to_show;
 	$args = array(
-		'number' => 5,
+		'number' => $no_page_drafts_to_show,
 		'post_type' => 'page',
 		'post_status' => 'draft',
 		'sort_column' => 'post_modified',
@@ -258,6 +356,19 @@ function pet_recently_edited_page_drafts() {
 	);
 	$pagedraft = get_pages( $args );
 	return $pagedraft;
+}
+function pet_recently_edited_page_future() {
+	global $no_page_future_to_show;
+	$args = array(
+		'number' => $no_page_future_to_show,
+		'post_type' => 'page',
+		'post_status' => 'future',
+		'sort_column' => 'post_modified',
+		'hierarchical' => 0,
+		'sort_order' => 'DESC'
+	);
+	$pagefuture = get_pages( $args );
+	return $pagefuture;
 }
 function return_short_title( $title_to_shorten, $if_empty ) {
 	// the variables passed

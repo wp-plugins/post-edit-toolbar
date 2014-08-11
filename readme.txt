@@ -36,6 +36,8 @@ For FAQs - see the post-edit-toolbar page at: http://webyourbusiness.com/post-ed
 
 == Upgrade Notice ==
 
+= 1.4.6 =
+Added Scheduled Pages + Posts Sections - so that future scheduled pages/posts show in the list
 = 1.4.4.1 =
 updated docs
 = 1.4.4 =
