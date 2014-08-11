@@ -4,12 +4,13 @@
 Plugin Name: Post Edit Toolbar
 Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds most recently edited posts to the WordPress Toolbar for easy access
-Version: 1.4.4
+Version: 1.4.4.1
 Author: Web Your Business
 Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.4.1 - updated docs
 1.4.4 - Added bloginfo('wpurl') to fix installations inside subfolders menus - now tested as working
 1.4.2 - fixed a couple of typos - and initiated blank classes where needed - tested on multiple sites + php installs
 1.4.1 - commented out blank title page code while I debug it (must be a difference between post + page fuctions in codex)

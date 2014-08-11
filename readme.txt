@@ -4,7 +4,7 @@ Donate link: http://webyourbusiness.com/post-edit-toolbar
 Tags: edit post, toolbar, admin bar, list posts, list drafts 
 Requires at least: 3.0.1
 Tested up to: 3.9.1
-Stable tag: 1.4.4
+Stable tag: 1.4.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,8 @@ For FAQs - see the post-edit-toolbar page at: http://webyourbusiness.com/post-ed
 
 == Upgrade Notice ==
 
+= 1.4.4.1 =
+updated docs
 = 1.4.4 =
 fixed bug where /wp-admin didn't work - replaced with get_bloginfo('wpurl').'/wp-admin/' - installations in folders other than root are now working
 = 1.4.2 =
