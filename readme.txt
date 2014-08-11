@@ -59,6 +59,8 @@ Added an 'Add drafts' - if you get interrupted while composing a post, you'll lo
 
 == Changelog ==
 
+= 1.4.6 =
+Added Scheduled Pages + Posts Sections - so that future scheduled pages/posts show in the list
 = 1.4.4 =
 fixed bug where /wp-admin didn't work - replaced with get_bloginfo('wpurl').'/wp-admin/'
 = 1.4.2 =
