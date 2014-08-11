@@ -3,22 +3,24 @@ Contributors: WebYourBusiness
 Donate link: http://webyourbusiness.com/post-edit-toolbar
 Tags: edit post, toolbar, admin bar, list posts, list drafts 
 Requires at least: 3.0.1
-Tested up to: 3.9.1
-Stable tag: 1.4.4.1
+Tested up to: 3.9.2
+Stable tag: 1.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts + posts.
+Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts, future schedules pages + posts.
 
 == Description ==
 
-Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts + posts. This provides you quick access to a work in progress, or a page/post that was recently published.
+Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts, future schedules pages + posts. This provides you quick access to a work in progress, or a page/post that was recently published.
 
-The new menus work as 'post quick edit' and 'page quick edit' shortcut menus - not forgetting 'drafts quick edit'.  The quick edit menus will allow you to access your recently used pages, posts and drafts in less clicks than first visting the posts page or pages page.
+The new menus work as 'post quick edit' and 'page quick edit' shortcut menus - not forgetting 'drafts quick edit'.  The quick edit menus will allow you to access your recently used pages, posts, drafts and even your scheduled posts + pages in less clicks than first visting the posts page or pages page.
 
 This plugin is designed for publishers who get interrupted while composing those posts (if you're anything like me - almost every post/page is interrupted, or composed and then saved as a draft before final publishing!
 
-Currently this plugin displays a separate menu for page drafts + pages, plus a second menu for your most recent draft posts and 5 most recent published posts
+Currently this plugin displays a separate menu for page drafts, scheduled page + published pages, plus a second menu for your most recent draft posts, scheduled posts and 5 most recent published posts.
+
+If you use WordPress admin (not the app) on your laptop or tablet (such as iPad) - you will probably find this plugin very useful.
 
 == Installation ===
 
