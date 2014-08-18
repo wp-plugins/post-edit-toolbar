@@ -31,7 +31,8 @@ If you use WordPress admin (not the app) on your laptop or tablet (such as iPad)
 
 == Screenshots ==
 
-1. The dropdown shows the add new post, 2 most recently edited drafter, and the 5 most recently published posts.
+1. The dropdown shows the add new Page, Drafts, Scheduled Pages + the 2 most recently edited pages.
+2. This dropdown shows the add new post, a future scheduled post and the most recently edited posts.
 
 == Frequently Asked Questions ==
 
