@@ -398,7 +398,7 @@ if ( ! function_exists( 'post_edit_toolbar_plugin_meta' ) ) :
         function post_edit_toolbar_plugin_meta( $links, $file ) { // add 'Plugin page' and 'Donate' links to plugin meta row
                 if ( strpos( $file, 'post-edit-toolbar.php' ) !== false ) {
                         $links = array_merge( $links, array( '<a href="http://www.webyourbusiness.com/post-edit-toolbar/#donate" title="Support the development">Donate</a>' ) );
-                        $links = array_merge( $links, array( '<a href="http://wordpress.org/support/view/plugin-reviews/post-edit-toolbar#postform" title="Rate-Post-Edit-Toolbar Pro">Please rate Post-Edit-Toolar</a>' ) );
+                        $links = array_merge( $links, array( '<a href="http://wordpress.org/support/view/plugin-reviews/post-edit-toolbar#postform" title="Rate-Post-Edit-Toolbar">Please rate Post-Edit-Toolar</a>' ) );
                 }
                 return $links;
         }
