@@ -4,12 +4,13 @@
 Plugin Name: Post Edit Toolbar
 Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds most recently edited posts to the WordPress Toolbar for easy access
-Version: 1.4.6
+Version: 1.4.7
 Author: Web Your Business
 Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.7 - Removed question about Pro version - we're keeping it simple - replaced with link to Rate this plugin
 1.4.6 - Added Scheduled Pages + Posts Sections - so that future scheduled pages/posts show in the list
 1.4.4.1 - updated docs
 1.4.4 - Added bloginfo('wpurl') to fix installations inside subfolders menus - now tested as working
@@ -397,7 +398,7 @@ if ( ! function_exists( 'post_edit_toolbar_plugin_meta' ) ) :
         function post_edit_toolbar_plugin_meta( $links, $file ) { // add 'Plugin page' and 'Donate' links to plugin meta row
                 if ( strpos( $file, 'post-edit-toolbar.php' ) !== false ) {
                         $links = array_merge( $links, array( '<a href="http://www.webyourbusiness.com/post-edit-toolbar/#donate" title="Support the development">Donate</a>' ) );
-                        $links = array_merge( $links, array( '<a href="http://www.webyourbusiness.com/post-edit-toolbar/#premium" title="Post-Edit-Toolbar Pro">Should we make a Pro version?</a>' ) );
+                        $links = array_merge( $links, array( '<a href="http://wordpress.org/support/view/plugin-reviews/post-edit-toolbar#postform" title="Rate-Post-Edit-Toolbar Pro">Please rate Post-Edit-Toolar</a>' ) );
                 }
                 return $links;
         }
