@@ -4,12 +4,13 @@
 Plugin Name: Post Edit Toolbar
 Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts, future schedules pages + posts.
-Version: 1.4.7
+Version: 1.4.7.1
 Author: Web Your Business
 Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.7.1 - Change rate for review - we need some reviews please people.  If you use and like this - please review / rate it.
 1.4.7 - Removed question about Pro version - we're keeping it simple - replaced with link to Rate this plugin
 1.4.6 - Added Scheduled Pages + Posts Sections - so that future scheduled pages/posts show in the list
 1.4.4.1 - updated docs
@@ -398,7 +399,7 @@ if ( ! function_exists( 'post_edit_toolbar_plugin_meta' ) ) :
         function post_edit_toolbar_plugin_meta( $links, $file ) { // add 'Plugin page' and 'Donate' links to plugin meta row
                 if ( strpos( $file, 'post-edit-toolbar.php' ) !== false ) {
                         $links = array_merge( $links, array( '<a href="http://www.webyourbusiness.com/post-edit-toolbar/#donate" title="Support the development">Donate</a>' ) );
-                        $links = array_merge( $links, array( '<a href="http://wordpress.org/support/view/plugin-reviews/post-edit-toolbar#postform" title="Rate-Post-Edit-Toolbar">Please rate Post-Edit-Toolar</a>' ) );
+                        $links = array_merge( $links, array( '<a href="http://wordpress.org/support/view/plugin-reviews/post-edit-toolbar#postform" title="Review-Post-Edit-Toolbar">Please Review Post-Edit-Toolar</a>' ) );
                 }
                 return $links;
         }
