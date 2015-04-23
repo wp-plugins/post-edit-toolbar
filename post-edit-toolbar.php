@@ -4,12 +4,13 @@
 Plugin Name: Post Edit Toolbar
 Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts, future schedules pages + posts.
-Version: 1.4.8.1
+Version: 1.4.8.2
 Author: Web Your Business
 Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.8.2 - Compatibility tested to WordPress 4.2 Powell
 1.4.8.1 - Compatibility tested to WordPress 4.1.2.
 1.4.8 - Removed Donate link and added link to Support via WordPress.org.
 1.4.7.1 - Change rate for review - we need some reviews please people.  If you use and like this - please review / rate it.
