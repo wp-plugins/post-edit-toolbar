@@ -10,6 +10,7 @@ Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.8.2 - Compatibility tested to WordPress 4.2.2 Powell
 1.4.8.2 - Compatibility tested to WordPress 4.2 Powell
 1.4.8.1 - Compatibility tested to WordPress 4.1.2.
 1.4.8 - Removed Donate link and added link to Support via WordPress.org.
