@@ -4,12 +4,13 @@
 Plugin Name: Post Edit Toolbar
 Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts, future schedules pages + posts.
-Version: 1.4.8.2
+Version: 1.4.8.3
 Author: Web Your Business
 Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.8.3 - Added code to prevent php from being called directly
 1.4.8.2 - Compatibility tested to WordPress 4.2.2 Powell
 1.4.8.2 - Compatibility tested to WordPress 4.2 Powell
 1.4.8.1 - Compatibility tested to WordPress 4.1.2.
@@ -36,13 +37,17 @@ Release Notes:
 Known issues: Page list does not shorten length to <40 like it should - investigate later
 */
 
-$no_page_drafts_to_show = 5;
-$no_page_future_to_show = 5;
-$no_page_edits_to_show  = 5;
+// Make sure we don't expose any info if called directly
+if ( !function_exists('add_action') )
+	die('Umm, Hi there!  I\'m a plugin, do not call me directly.');
 
-$no_post_drafts_to_show = 5;
-$no_post_future_to_show = 5;
-$no_post_edits_to_show  = 5;
+if (!isset($no_page_drafts_to_show)) { $no_page_drafts_to_show = 5; }
+if (!isset($no_page_future_to_show)) { $no_page_future_to_show = 5; }
+if (!isset($no_page_edits_to_show)) { $no_page_edits_to_show  = 5; }
+
+if (!isset($no_post_drafts_to_show)) { $no_post_drafts_to_show = 5; }
+if (!isset($no_post_future_to_show)) { $no_post_future_to_show = 5; }
+if (!isset($no_post_edits_to_show )) { $no_post_edits_to_show  = 5; }
 
 add_action( 'admin_bar_menu', 'pet_page_admin_bar_function', 998 );
 add_action( 'admin_bar_menu', 'pet_post_admin_bar_function', 998 );
