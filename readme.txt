@@ -2,7 +2,7 @@
 Contributors: WebYourBusiness,greghl
 Donate link: http://webyourbusiness.com/post-edit-toolbar
 Tags: Post, posts, admin, edit post, toolbar, admin bar, list posts, list drafts, edit page, edit page list, edit post list, page edit toolbar, post edit toolbar, sidebar, helper
-Requires at least: 3.0.1
+Requires at least: 3.1
 Tested up to: 4.2.2
 Stable tag: 1.4.8.3
 License: GPLv2 or later
