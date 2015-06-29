@@ -4,12 +4,14 @@
 Plugin Name: Post Edit Toolbar
 Plugin URI: http://www.webyourbusiness.com/post-edit-toolbar/
 Description: Adds a pair of dropdowns 'Page list' and 'Post List' to the WordPress toolbar of the most recently edited pages, drafts, future schedules pages + posts.
-Version: 1.4.8.3
+Version: 1.4.9
 Author: Web Your Business
 Author URI: http://www.webyourbusiness.com/
 
 Release Notes:
 
+1.4.9 - added apply_filters to the post/page title
+1.4.8.4 - updated min. WordPress level required to 3.1 (cmon people - update!)
 1.4.8.3 - Added code to prevent php from being called directly
 1.4.8.2 - Compatibility tested to WordPress 4.2.2 Powell
 1.4.8.2 - Compatibility tested to WordPress 4.2 Powell
@@ -383,7 +385,8 @@ function pet_recently_edited_page_future() {
 }
 function return_short_title( $title_to_shorten, $if_empty ) {
 	// the variables passed
-	$the_title = $title_to_shorten;
+//	$the_title = $title_to_shorten;
+	$the_title = apply_filters('the_title', $title_to_shorten );
 	$return_if_empty = $if_empty;
 	$return_value = $the_title;
 	if (trim($the_title)== FALSE) {
