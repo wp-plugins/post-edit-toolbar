@@ -4,7 +4,7 @@ Donate link: http://webyourbusiness.com/post-edit-toolbar
 Tags: Post, posts, admin, edit post, toolbar, admin bar, list posts, list drafts, edit page, edit page list, edit post list, page edit toolbar, post edit toolbar, sidebar, helper
 Requires at least: 3.1
 Tested up to: 4.2.3
-Stable tag: 1.4.10
+Stable tag: 1.4.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,8 @@ For FAQs - see the post-edit-toolbar page at: http://webyourbusiness.com/post-ed
 
 == Upgrade Notice ==
 
+= 1.4.11 =
+WordPress 4.2.4 compatibility
 = 1.4.10 =
 WordPress 4.2.3 compatibility
 = 1.4.9 =
@@ -80,6 +82,8 @@ Added an 'Add drafts' - if you get interrupted while composing a post, you'll lo
 
 == Changelog ==
 
+= 1.4.11 =
+WordPress 4.2.4 compatibility
 = 1.4.10 =
 WordPress 4.2.3 compatibility
 = 1.4.9 =
